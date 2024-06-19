@@ -5,6 +5,7 @@ import httpx
 import asyncio
 import os
 import json
+import image_classifier
 from user_info import User_info
 from csv_gen import csv_gen
 from cache_gen import cache_gen
@@ -47,6 +48,7 @@ cache_data = None
 down_log = False
 async_down = True
 autoSync = False
+classify_images = False
 
 start_time_stamp = 655028357000   #1990-10-04
 end_time_stamp = 2548484357000    #2050-10-04
@@ -58,6 +60,9 @@ with open('settings.json', 'r', encoding='utf8') as f:
     if not settings['save_path']:
         settings['save_path'] = os.getcwd()
     settings['save_path'] += os.sep
+    if settings['classify_path']:
+        classify_images = True
+        settings['classify_path'] += os.sep
     if settings['has_retweet']:
         has_retweet = True
     if settings['high_lights']:
@@ -379,3 +384,10 @@ if __name__=='__main__':
         start_label = True
         First_Page = True
     print(f'共耗时:{time.time()-_start}秒\n共调用{request_count}次API\n共下载{down_count}份图片/视频')
+    if classify_images:
+        if not settings['save_path'] or not settings['classify_path']:
+            print("错误：必须提供源目录和目标目录。")
+        else:
+            print("开始分类图片...")
+            image_classifier.classify_images_by_date(settings['save_path'], settings['classify_path'])
+            print("图片分类完成。")

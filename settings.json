@@ -2,6 +2,9 @@
     "save_path": "",
     "save_path_info": "就算是windows路径也请用 '/' ,而不是反斜杠(可以留空)",
 
+    "classify_path": "",
+    "classify_path_info": "对图片按日期分类后保存到的路径,就算是windows路径也请用 '/' ,而不是反斜杠(可以留空)",
+
     "user_lst": "lilmonix3,matchach",
     "user_lst_info": "填入要下载的用户名(@后面的字符),支持多用户下载,用户名字间逗号(英文逗号,不要有空格)隔开",
 
